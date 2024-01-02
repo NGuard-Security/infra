@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  web:
+    image: ghcr.io/nguard-security/nguard_security_web:latest
+    ports:
+      - 8888:8888
+    restart: always
+
+  invite:
+    image: ghcr.io/nguard-security/nguard_security_invite:latest
+    ports:
+      - 8001:8001
+    restart: always
+    
+  api:
+    image: ghcr.io/nguard-security/nguard_security_api_new:latest
+    ports:
+      - 4000:4000
+    env_file:
+      - .env
+    restart: always
+
+  redis:
+    image: redis:7.2-alpine
+    ports:
+      - 6379:6379
+    command: redis-server /usr/local/etc/redis/redis.conf
+    volumes:
+      - ./redis/data:/data
+      - ./redis/conf/redis.conf:/usr/local/etc/redis/redis.conf
+    labels:
+      - 'name=redis'
+      - 'mode=standalone'
+    restart: always
