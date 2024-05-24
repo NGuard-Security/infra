@@ -1,12 +1,6 @@
 version: '3.8'
 
 services:
-  web:
-    image: ghcr.io/nguard-security/nguard_security_web:latest
-    ports:
-      - 8888:8888
-    restart: always
-
   invite:
     image: ghcr.io/nguard-security/nguard_security_invite:latest
     ports:
